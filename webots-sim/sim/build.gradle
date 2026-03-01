@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+def webotsHome = System.getenv("WEBOTS_HOME") ?: "/Applications/Webots.app/Contents"
+
+dependencies {
+    compileOnly files("${webotsHome}/lib/controller/java/Controller.jar")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../../TeamCode/src/main/java']
+        }
+    }
+}
+
+// Copy compiled classes to the Webots controller directory
+task deployController(type: Copy, dependsOn: classes) {
+    from sourceSets.main.output.classesDirs
+    into '../controllers/FtcBridge'
+}
+
+build.dependsOn deployController
