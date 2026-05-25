@@ -1,0 +1,322 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+  info [
+    "FTC Field Simulation"
+  ]
+  title "FTC Field"
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation 1 0 0 0
+  position -1 0 6
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3.6576 3.6576
+  floorTileSize 0.6096 0.6096
+  floorAppearance PBRAppearance {
+    baseColor 0.5 0.5 0.5
+    baseColorMap ImageTexture {
+      url ["textures/tile_gray.png"]
+    }
+    roughness 0.8
+    metalness 0
+  }
+  wallHeight 0.3048
+  wallThickness 0.025
+}
+Robot {
+  translation 0 0.08 0
+  rotation 1 0 0 1.5708
+  children [
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.2 0.8
+        roughness 0.5
+        metalness 0
+      }
+      geometry Box {
+        size 0.457 0.15 0.457
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis -1 0 0
+        anchor -0.24 -0.035 0
+      }
+      device [
+        RotationalMotor {
+          name "left_drive"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "left_drive_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.24 -0.035 0
+        children [
+          Transform {
+            rotation 0 1 0 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.1 0.1 0.1
+                  roughness 0.8
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+          }
+        ]
+        name "left_wheel"
+        boundingObject Transform {
+          rotation 0 1 0 1.5708
+          children [
+            Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 1 0 0
+        anchor 0.24 -0.035 0
+      }
+      device [
+        RotationalMotor {
+          name "right_drive"
+          maxVelocity 20
+        }
+        PositionSensor {
+          name "right_drive_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.24 -0.035 0
+        children [
+          Transform {
+            rotation 0 1 0 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.1 0.1 0.1
+                  roughness 0.8
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+          }
+        ]
+        name "right_wheel"
+        boundingObject Transform {
+          rotation 0 1 0 1.5708
+          children [
+            Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    Solid {
+      translation 0 -0.055 -0.2
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Sphere {
+            radius 0.02
+          }
+        }
+      ]
+      name "caster"
+      contactMaterial "caster"
+      boundingObject Sphere {
+        radius 0.02
+      }
+      physics Physics {
+        density -1
+        mass 0.01
+      }
+    }
+  ]
+  name "FTC Robot"
+  boundingObject Box {
+    size 0.457 0.15 0.457
+  }
+  physics Physics {
+    density -1
+    mass 5.0
+  }
+  controller "FtcBridge"
+}
+DEF GREEN_BALL_1 Solid {
+  translation -1.0 0.8 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_1"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}
+DEF GREEN_BALL_2 Solid {
+  translation 1.2 -0.5 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_2"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}
+DEF GREEN_BALL_3 Solid {
+  translation -0.7 -1.1 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_3"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}
+DEF PURPLE_BALL_1 Solid {
+  translation 0.5 1.3 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_1"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}
+DEF PURPLE_BALL_2 Solid {
+  translation -1.4 -0.3 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_2"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}
+DEF PURPLE_BALL_3 Solid {
+  translation 0.9 -1.4 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_3"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+  }
+}

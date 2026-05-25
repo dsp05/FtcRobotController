@@ -3,31 +3,240 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
 
 WorldInfo {
   info [
     "FTC Field Simulation"
   ]
   title "FTC Field"
-  basicTimeStep 16
+  basicTimeStep 8
+  contactProperties [
+    ContactProperties {
+      coulombFriction [0.4]
+      bounce 0.3
+      rollingFriction 0.001 0.001 0.001
+    }
+    ContactProperties {
+      material1 "goal"
+      softCFM 0.0001
+      softERP 0.9
+      bounce 0.3
+    }
+  ]
 }
 Viewpoint {
-  orientation 0 1 0 1.5708
-  position 0 0 10
+  orientation 0 1 0 0.8402238978529892
+  position -11 0 12
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-RectangleArena {
-  floorSize 3.66 3.66
-  floorTileSize 0.61 0.61
-  wallHeight 0.15
+
+DEF FIELD RectangleArena {
+  locked TRUE
+  floorSize 3.6576 3.6576
+  floorTileSize 0.6096 0.6096
+  floorAppearance PBRAppearance {
+    baseColor 0.5 0.5 0.5
+    baseColorMap ImageTexture {
+      url ["textures/tile_gray.png"]
+    }
+    roughness 0.8
+    metalness 0
+  }
+  wallHeight 0.3048
   wallThickness 0.025
 }
-Robot {
-  translation 0 0.08 0
-  rotation 1 0 0 1.5708
+DEF BLUE_GOAL Solid {
+  locked TRUE
+  rotation 0 0 -1 1.57
+  translation 0 0 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.2 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Mesh {
+        url ["blue-goal-collision.stl"]
+      }
+      castShadows FALSE
+    }
+  ]
+  name "blue_goal"
+  contactMaterial "goal"
+  boundingObject Mesh {
+    url ["blue-goal-collision.stl"]
+  }
+}
+DEF GREEN_BALL_1 Solid {
+  translation 1.62 1.70 1.70
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_1"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+DEF GREEN_BALL_2 Solid {
+  translation 1.62 1.70 1.85
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_2"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+DEF GREEN_BALL_3 Solid {
+  translation -0.7 -1.1 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.2 0.8 0.2
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "green_ball_3"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+DEF PURPLE_BALL_1 Solid {
+  translation 1.62 1.56 1.73
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_1"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+DEF PURPLE_BALL_2 Solid {
+  translation -1.4 -0.3 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_2"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+DEF PURPLE_BALL_3 Solid {
+  translation 0.9 -1.4 0.057
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.1 0.8
+        roughness 0.4
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.057
+      }
+    }
+  ]
+  name "purple_ball_3"
+  boundingObject Sphere {
+    radius 0.057
+  }
+  physics Physics {
+    density -1
+    mass 0.1
+    damping Damping {
+      linear 0.1
+      angular 0.1
+    }
+  }
+}
+
+DEF ROBOT Robot {
+  translation 0 0 0.08
   children [
     DEF BODY Shape {
       appearance PBRAppearance {
@@ -36,13 +245,13 @@ Robot {
         metalness 0
       }
       geometry Box {
-        size 0.457 0.15 0.457
+        size 0.3 0.3 0.1
       }
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        axis -1 0 0
-        anchor -0.24 -0.035 0
+        axis 1 0 0
+        anchor -0.16 -0.05 -0.02
       }
       device [
         RotationalMotor {
@@ -54,34 +263,25 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.24 -0.035 0
+        translation -0.16 -0.05 -0.02
+        rotation 0 1 0 1.5708
         children [
-          Transform {
-            rotation 0 1 0 1.5708
-            children [
-              Shape {
-                appearance PBRAppearance {
-                  baseColor 0.1 0.1 0.1
-                  roughness 0.8
-                  metalness 0
-                }
-                geometry Cylinder {
-                  height 0.03
-                  radius 0.05
-                }
-              }
-            ]
-          }
-        ]
-        name "left_wheel"
-        boundingObject Transform {
-          rotation 0 1 0 1.5708
-          children [
-            Cylinder {
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 0.8
+              metalness 0
+            }
+            geometry Cylinder {
               height 0.03
               radius 0.05
             }
-          ]
+          }
+        ]
+        name "left_drive"
+        boundingObject Cylinder {
+          height 0.03
+          radius 0.05
         }
         physics Physics {
           density -1
@@ -91,8 +291,8 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        axis 1 0 0
-        anchor 0.24 -0.035 0
+        axis -1 0 0
+        anchor 0.16 -0.05 -0.02
       }
       device [
         RotationalMotor {
@@ -104,34 +304,25 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.24 -0.035 0
+        translation 0.16 -0.05 -0.02
+        rotation 0 1 0 1.5708
         children [
-          Transform {
-            rotation 0 1 0 1.5708
-            children [
-              Shape {
-                appearance PBRAppearance {
-                  baseColor 0.1 0.1 0.1
-                  roughness 0.8
-                  metalness 0
-                }
-                geometry Cylinder {
-                  height 0.03
-                  radius 0.05
-                }
-              }
-            ]
-          }
-        ]
-        name "right_wheel"
-        boundingObject Transform {
-          rotation 0 1 0 1.5708
-          children [
-            Cylinder {
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.1 0.1 0.1
+              roughness 0.8
+              metalness 0
+            }
+            geometry Cylinder {
               height 0.03
               radius 0.05
             }
-          ]
+          }
+        ]
+        name "right_drive"
+        boundingObject Cylinder {
+          height 0.03
+          radius 0.05
         }
         physics Physics {
           density -1
@@ -140,7 +331,7 @@ Robot {
       }
     }
     Solid {
-      translation 0 -0.055 -0.2
+      translation 0 0.13 -0.04
       children [
         Shape {
           appearance PBRAppearance {
@@ -154,7 +345,6 @@ Robot {
         }
       ]
       name "caster"
-      contactMaterial "caster"
       boundingObject Sphere {
         radius 0.02
       }
@@ -166,7 +356,7 @@ Robot {
   ]
   name "FTC Robot"
   boundingObject Box {
-    size 0.457 0.15 0.457
+    size 0.3 0.3 0.1
   }
   physics Physics {
     density -1
